@@ -1,17 +1,20 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [buildId, setBuildId] = useState<string | null>(null);
+
   useEffect(() => {
     const pollBuildId = async () => {
       try {
         const response = await fetch('/api/build-id');
         const data = await response.json();
-        console.log('Build ID:', data.buildId, 'Timestamp:', new Date(data.timestamp).toISOString());
+        console.log('Build ID:', data.buildId);
+        setBuildId(data.buildId);
       } catch (error) {
-        console.error('Error fetching build ID:', error);
+        console.error('Error fetching build ID:', error); 
       }
       
       setTimeout(pollBuildId, 5000); // Poll every 5 seconds
@@ -40,15 +43,21 @@ export default function Home() {
             .
           </li>
           <li className="tracking-[-.01em]">
-            No pre prod
+            Server Build ID: {buildId}
+          </li>
+          <li className="tracking-[-.01em]">
+            Client Build ID: {process.env.NEXT_PUBLIC_BUILD_ID}
           </li>
         </ol>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <a
             className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            // href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
             target="_blank"
+            onClick={() => {
+              console.log(process.env.NEXT_PUBLIC_BUILD_ID)
+            }}
             rel="noopener noreferrer"
           >
             <Image
