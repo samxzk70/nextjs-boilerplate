@@ -1,8 +1,7 @@
-import type { NextConfig } from "next";
-import nextBuildId from "next-build-id";
+const nextBuildId = require("next-build-id");
 
-
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   generateBuildId: async () => {
     const id = await nextBuildId({ dir: __dirname, describe: true });
     process.env.NEXT_PUBLIC_BUILD_ID = id;
@@ -14,4 +13,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
