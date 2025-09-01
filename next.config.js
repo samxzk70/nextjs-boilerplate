@@ -3,9 +3,11 @@ const nextBuildId = require("next-build-id");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   generateBuildId: async () => {
-    const id = await nextBuildId({ dir: __dirname, describe: true });
-    process.env.NEXT_PUBLIC_BUILD_ID = id;
+    const id = await nextBuildId();
     return id;
+  },
+  env: {
+    BUILD_ID: nextBuildId.sync(),
   },
 };
 

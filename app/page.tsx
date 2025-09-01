@@ -46,7 +46,7 @@ export default function Home() {
             Server Build ID: {buildId}
           </li>
           <li className="tracking-[-.01em]">
-            Client Build ID: {process.env.NEXT_PUBLIC_BUILD_ID}
+            Client Build ID: {process.env.BUILD_ID}
           </li>
         </ol>
 
@@ -56,7 +56,7 @@ export default function Home() {
             // href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
             target="_blank"
             onClick={() => {
-              console.log(process.env.NEXT_PUBLIC_BUILD_ID)
+              console.log(process.env.BUILD_ID)
             }}
             rel="noopener noreferrer"
           >
