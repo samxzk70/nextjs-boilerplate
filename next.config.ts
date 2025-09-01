@@ -1,11 +1,16 @@
 import type { NextConfig } from "next";
+import nextBuildId from "next-build-id";
 
-const BUILD_ID = Date.now().toString()
 
 const nextConfig: NextConfig = {
-  generateBuildId: () => BUILD_ID,
+  generateBuildId: async () => {
+    const id = await nextBuildId({ dir: __dirname, describe: true });
+    process.env.NEXT_PUBLIC_BUILD_ID = id;
+    return id;
+  },
+
   env: {
-    NEXT_PUBLIC_BUILD_ID: BUILD_ID,
+    NEXT_PUBLIC_BUILD_ID: process.env.NEXT_PUBLIC_BUILD_ID,
   },
 };
 
