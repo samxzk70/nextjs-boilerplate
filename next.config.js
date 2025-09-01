@@ -7,10 +7,6 @@ const nextConfig = {
     process.env.NEXT_PUBLIC_BUILD_ID = id;
     return id;
   },
-
-  env: {
-    NEXT_PUBLIC_BUILD_ID: process.env.NEXT_PUBLIC_BUILD_ID,
-  },
 };
 
 module.exports = nextConfig;
