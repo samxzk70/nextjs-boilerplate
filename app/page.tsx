@@ -9,9 +9,9 @@ export default function Home() {
   useEffect(() => {
     const pollBuildId = async () => {
       try {
+        console.log('yo wohooo', process.env.NEXT_PUBLIC_VERCEL_DEPLOYMENT_ID)
         const response = await fetch('/api/build-id');
         const data = await response.json();
-        console.log('Build ID:', data.buildId);
         setBuildId(data.buildId);
       } catch (error) {
         console.error('Error fetching build ID:', error); 
